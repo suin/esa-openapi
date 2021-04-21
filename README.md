@@ -33,6 +33,37 @@ Swagger Editor で esa API を読み込むには次の手順を行ってくだ�
 
 > TODO
 
+### NPM でインストールして使う
+
+esa-api.json は NPM パッケージとして配布しています。npm でインストールすると JavaScript 上で読み込めます。
+
+インストール方法:
+
+```shell
+npm install @suin/esa-openapi
+```
+
+Node.js で読み込む方法:
+
+```js
+const esaOpenApi = require("@suin/esa-openapi");
+
+console.log(esaOpenApi);
+//=> {
+//   openapi: '3.0.0',
+//   info: {
+//     title: 'esa API v1',
+//     description: 'チームのナレッジ共有サービス[esa.io](https://esa.io/)のAPI v1の仕様書',
+//     version: '1.0.0',
+//     termsOfService: 'https://docs.esa.io/posts/5',
+//     'x-logo': {
+//       url: 'https://img.esa.io/uploads/production/attachments/3/2018/11/13/2/fe8f24a1-a23d-4c96-951c-f6f4433d1399.png',
+//       altText: 'esa'
+//     }
+//   },
+// ...
+```
+
 ## 開発に参加する
 
 このプロジェクトの開発に参加する方法について説明します。
