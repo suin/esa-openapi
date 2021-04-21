@@ -25,7 +25,7 @@
     "clean:dry": "git clean -Xdfn -e '!/.idea/**' -e '!/node_modules' -e '!/node_modules/**'",
     "format": "yarn prettier --write",
     "format:check": "yarn prettier --check",
-    "pack:preview": "PACKAGE=$(npm pack 2> /dev/null) sh -c 'set -eu && tar tf $PACKAGE | sort && rm $PACKAGE'",
+    "pack:preview": "PACKAGE=$(npm pack --ignore-scripts 2> /dev/null) sh -c 'set -eu && tar tf $PACKAGE | sort && rm $PACKAGE'",
     "prettier": "prettier '**/*.{ts,tsx,json,json5,css,scss,graphql,gql,md,mdx,html,vue,yaml}'",
     "reference": "typedoc --includeVersion --exclude 'node_modules/**/*' --exclude '**/*+(.spec|.test).ts' --stripInternal --gitRevision \"`git describe --tags --abbrev=0 || echo master`\" --out reference .",
     "reset": "git clean -Xdf -e '!/.idea/**'",
