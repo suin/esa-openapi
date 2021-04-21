@@ -29,9 +29,51 @@ Swagger Editor で esa API を読み込むには次の手順を行ってくだ�
 
 <p align="center"><a href="https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/suin/esa-openapi/main/esa-api.json"><strong>» esa API を ReDoc で見る «</strong></a></p>
 
-### openapi-generator-cli でクライアントを生成する
+### OpenAPI Generator でクライアントを生成する
 
-> TODO
+OpenAPI Generator は様々な言語の API クライアントを生成できるツールです。
+
+#### OpenAPI Generator のインストール
+
+OpenAPI Generator は次の複数の方法でインストールできます。
+
+- NPM
+- Homebrew
+- Docker
+- JAR
+
+詳細は[公式ドキュメント](https://openapi-generator.tech/docs/installation)をご覧ください。
+
+ここでは NPM でインストールした OpenAPI Generator を用いてクライアントを生成する方法を説明します。
+
+#### TypeScript のクライアントを生成する
+
+TypeScript のクライアントを生成するには次のコマンドを実行します:
+
+```shell
+npx @openapitools/openapi-generator-cli generate \
+    -g typescript-axios \
+    -i https://raw.githubusercontent.com/suin/esa-openapi/main/esa-api.json \
+    -o client \
+    --additional-properties=supportsES6=true,typescriptThreePlus=true,useSingleRequestParameter=true,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=models
+```
+
+クライアントは`client`ディレクトリに生成されます。これを TypeScript で使うには次のようにします:
+
+```typescript
+import { Configuration, PostApi } from "./client";
+
+(async () => {
+  const postApi = new PostApi(
+    new Configuration({ accessToken: process.env.ESA_API_TOKEN })
+  );
+  const { data } = await postApi.getPosts({ teamName: "doc" });
+
+  for (const post of data.posts) {
+    console.log(post.name);
+  }
+})();
+```
 
 ### NPM でインストールして使う
 
