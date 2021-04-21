@@ -75,6 +75,20 @@ import { Configuration, PostApi } from "./client";
 })();
 ```
 
+TypeScript は typescript-axios の他にも次のクライアントが生成できます:
+
+- typescript (experimental)
+- typescript-angular
+- typescript-angularjs-deprecated (deprecated)
+- typescript-aurelia
+- typescript-fetch
+- typescript-inversify
+- typescript-jquery
+- typescript-nestjs (experimental)
+- typescript-node
+- typescript-redux-query
+- typescript-rxjs
+
 #### PHP のクライアントを生成する
 
 Guzzle を用いた PHP クライアントライブラリが生成できます。
