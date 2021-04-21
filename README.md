@@ -75,6 +75,20 @@ import { Configuration, PostApi } from "./client";
 })();
 ```
 
+#### PHP のクライアントを生成する
+
+Guzzle を用いた PHP クライアントライブラリが生成できます。
+
+PHP のクライアントを生成するには次のコマンドを実行します:
+
+```shell
+npx @openapitools/openapi-generator-cli generate \
+    -g php \
+    -i https://raw.githubusercontent.com/suin/esa-openapi/main/esa-api.json \
+    -o client \
+    --additional-properties=invokerPackage='YourOrg\YourProject'
+```
+
 ### NPM でインストールして使う
 
 esa-api.json は NPM パッケージとして配布しています。npm でインストールすると JavaScript 上で読み込めます。
