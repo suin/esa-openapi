@@ -8,7 +8,24 @@ OpenAPI 定義ファイルは[esa-api.json](./esa-api.json)になります。
 
 ### Swagger Editor で見る
 
-> TODO
+Swagger Editor は、ブラウザ上で OpenAPI を編集したり、API ドキュメントをプレビューが見れるエディタです。
+
+Swagger Editor で esa API を読み込むには次の手順を行ってください:
+
+1. [Swagger Editor を開く](https://editor.swagger.io/#)
+1. メニューの「File」→「Import URL」でダイアログを開き、次の URL を入力する:
+
+   ```
+   https://raw.githubusercontent.com/suin/esa-openapi/main/esa-api.json
+   ```
+
+エディタのプレビュー画面上では、認証情報を入力することで、実際の API にリクエストを送信することもできます。認証情報はプレビュー画面右上の「Authorize」を開き、「AccessTokenHeader」に本物の esa API アクセストークンを入力してください。(OAuth2 による認証方法はうまく動きません。)
+
+### ReDoc で見る
+
+[ReDoc](https://redoc.ly/) は OpenAPI のファイルを読み込むだけで API ドキュメントを表示できる React ベースのウェブアプリケーションです。
+
+[esa API を ReDoc で見る](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/suin/esa-openapi/main/esa-api.json)
 
 ### openapi-generator-cli でクライアントを生成する
 
