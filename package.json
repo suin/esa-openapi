@@ -1,0 +1,118 @@
+{
+  "name": "@suin/esa-openapi",
+  "version": "0.0.0-development",
+  "description": "esa.io APIのOpenAPI準拠の仕様書",
+  "keywords": [
+    "esa"
+  ],
+  "homepage": "https://github.com/suin/esa-openapi#readme",
+  "bugs": {
+    "url": "https://github.com/suin/esa-openapi/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suin/esa-openapi.git"
+  },
+  "license": "MIT",
+  "author": "suin <suinyeze@gmail.com>",
+  "main": "esa-api.json",
+  "files": [
+    "esa-api.json"
+  ],
+  "scripts": {
+    "build": "pnpm generate:spec && pnpm validate:spec",
+    "clean": "git clean -Xdf -e '!/.idea/**' -e '!/node_modules' -e '!/node_modules/**'",
+    "clean:dry": "git clean -Xdfn -e '!/.idea/**' -e '!/node_modules' -e '!/node_modules/**'",
+    "format": "yarn prettier --write",
+    "format:check": "yarn prettier --check",
+    "pack:preview": "PACKAGE=$(npm pack 2> /dev/null) sh -c 'set -eu && tar tf $PACKAGE | sort && rm $PACKAGE'",
+    "prettier": "prettier '**/*.{ts,tsx,json,json5,css,scss,graphql,gql,md,mdx,html,vue,yaml}'",
+    "reference": "typedoc --includeVersion --exclude 'node_modules/**/*' --exclude '**/*+(.spec|.test).ts' --stripInternal --gitRevision \"`git describe --tags --abbrev=0 || echo master`\" --out reference .",
+    "reset": "git clean -Xdf -e '!/.idea/**'",
+    "reset:dry": "git clean -Xdfn -e '!/.idea/**'",
+    "semantic-release": "semantic-release",
+    "test": "jest",
+    "prepare": "husky install",
+    "preinstall": "npx only-allow pnpm",
+    "generate:spec": "ts-node generate.ts > esa-api.json && prettier esa-api.json -w",
+    "validate:spec": "openapi-generator-cli validate -i esa-api.json",
+    "generate:client": "openapi-generator-cli generate -g typescript-axios -i esa-api.json -o client --additional-properties=modelPropertyNaming=camelCase,supportsES6=true,typescriptThreePlus=true,useSingleRequestParameter=true,enumPropertyNaming=camelCase,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=models"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,json,json5,css,scss,graphql,gql,md,mdx,html,vue,yaml}": "prettier --write",
+    "./package.json": "sort-package-json",
+    "esa-api.json": "openapi-generator-cli validate -i "
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/spec.*"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.2.5",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "@types/jest": "^26.0.22",
+    "@types/pluralize": "^0.0.29",
+    "axios": "^0.21.1",
+    "glob": "^7.1.6",
+    "glob-promise": "^4.1.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "lint-staged": ">=10",
+    "openapi3-ts": "^2.0.1",
+    "outdent": "^0.8.0",
+    "pluralize": "^8.0.0",
+    "prettier": "^2.2",
+    "semantic-release": "^17.4.2",
+    "sort-package-json": "^1.49.0",
+    "ts-jest": "^26.5.5",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.20.35",
+    "typescript": "^4.2"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": true
+        }
+      ],
+      "@semantic-release/github",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "CHANGELOG.md"
+          ]
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "successCmd": "yarn reference"
+        }
+      ]
+    ]
+  }
+}
