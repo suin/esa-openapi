@@ -23,9 +23,11 @@ Swagger Editor で esa API を読み込むには次の手順を行ってくだ�
 
 ### ReDoc で見る
 
+<a href="https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/suin/esa-openapi/main/esa-api.json"><img width="1280" alt="ReDocのプレビュー" src="https://user-images.githubusercontent.com/855338/115491377-d0ff7d00-a29a-11eb-85a7-ef0d7ff7bc3d.png"></a>
+
 [ReDoc](https://redoc.ly/) は OpenAPI のファイルを読み込むだけで API ドキュメントを表示できる React ベースのウェブアプリケーションです。
 
-[esa API を ReDoc で見る](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/suin/esa-openapi/main/esa-api.json)
+<p align="center"><a href="https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/suin/esa-openapi/main/esa-api.json"><strong>» esa API を ReDoc で見る «</strong></a></p>
 
 ### openapi-generator-cli でクライアントを生成する
 
