@@ -73,14 +73,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm semantic-release
-      - name: Check reference existence
-        id: check_reference
-        uses: andstor/file-existence-action@v1
-        with:
-          files: "reference"
-      - name: Publish API reference
-        uses: peaceiris/actions-gh-pages@v3
-        if: steps.check_reference.outputs.files_exists == 'true'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./reference
+#      - name: Check reference existence
+#        id: check_reference
+#        uses: andstor/file-existence-action@v1
+#        with:
+#          files: "reference"
+#      - name: Publish API reference
+#        uses: peaceiris/actions-gh-pages@v3
+#        if: steps.check_reference.outputs.files_exists == 'true'
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          publish_dir: ./reference
