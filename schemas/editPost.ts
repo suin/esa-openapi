@@ -70,4 +70,5 @@ export const editPost: SchemaObjectWithTitle = {
       },
     },
   },
+  required: ["post"],
 };

@@ -1352,7 +1352,8 @@
               }
             }
           }
-        }
+        },
+        "required": ["comment"]
       },
       "EditPost": {
         "title": "EditPost",
@@ -1429,7 +1430,8 @@
               }
             }
           }
-        }
+        },
+        "required": ["post"]
       },
       "EmailsToInvite": {
         "title": "EmailsToInvite",
@@ -1619,7 +1621,8 @@
             },
             "required": ["body_md"]
           }
-        }
+        },
+        "required": ["comment"]
       },
       "NewEmoji": {
         "title": "NewEmoji",
@@ -1704,7 +1707,8 @@
             },
             "required": ["name"]
           }
-        }
+        },
+        "required": ["post"]
       },
       "NewStar": {
         "title": "NewStar",

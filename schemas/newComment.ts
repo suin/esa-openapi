@@ -24,4 +24,5 @@ export const newComment: SchemaObjectWithTitle = {
       required: ["body_md"],
     },
   },
+  required: ["comment"],
 };

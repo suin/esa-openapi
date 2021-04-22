@@ -45,4 +45,5 @@ export const newPost: SchemaObjectWithTitle = {
       required: ["name"],
     },
   },
+  required: ["post"],
 };

@@ -23,4 +23,5 @@ export const editComment: SchemaObjectWithTitle = {
       },
     },
   },
+  required: ["comment"],
 };
