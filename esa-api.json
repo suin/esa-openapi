@@ -2490,16 +2490,56 @@
     "callbacks": {}
   },
   "tags": [
-    { "name": "category", "description": "記事のカテゴリ" },
-    { "name": "comment", "description": "記事のコメント" },
-    { "name": "emoji", "description": "絵文字" },
-    { "name": "invitation", "description": "招待" },
-    { "name": "member", "description": "メンバー" },
-    { "name": "post", "description": "記事" },
-    { "name": "star", "description": "Star" },
-    { "name": "team", "description": "チーム" },
-    { "name": "user", "description": "認証中のユーザー" },
-    { "name": "watch", "description": "Watch" }
+    {
+      "name": "category",
+      "description": "記事のカテゴリの管理を行うAPIです。",
+      "x-displayName": "カテゴリ"
+    },
+    {
+      "name": "comment",
+      "description": "記事のコメントの投稿や取得などを行うAPIです。",
+      "x-displayName": "コメント"
+    },
+    {
+      "name": "emoji",
+      "description": "絵文字の管理を行うAPIです。",
+      "x-displayName": "絵文字"
+    },
+    {
+      "name": "invitation",
+      "description": "メンバーの招待を行うAPIです。",
+      "x-displayName": "招待"
+    },
+    {
+      "name": "member",
+      "description": "メンバーの管理を行うAPIです。",
+      "x-displayName": "メンバー"
+    },
+    {
+      "name": "post",
+      "description": "記事の投稿や取得などを行うAPIです。",
+      "x-displayName": "記事"
+    },
+    {
+      "name": "star",
+      "description": "記事やコメントのStarに関するAPIです。",
+      "x-displayName": "Star"
+    },
+    {
+      "name": "team",
+      "description": "所属するチームに関するAPIです。",
+      "x-displayName": "チーム"
+    },
+    {
+      "name": "user",
+      "description": "認証中のユーザーを参照するAPIです。",
+      "x-displayName": "ユーザー"
+    },
+    {
+      "name": "watch",
+      "description": "記事のWatchに関するAPIです。",
+      "x-displayName": "Watch"
+    }
   ],
   "servers": [{ "url": "https://api.esa.io/v1" }],
   "externalDocs": {
