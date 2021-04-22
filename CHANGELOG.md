@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/suin/esa-openapi/compare/v1.1.0...v1.1.1) (2021-04-22)
+
+
+### Bug Fixes
+
+* 🐛 必須プロパティの指定漏れを修正しました ([f775314](https://github.com/suin/esa-openapi/commit/f775314fd55bc997cfc030ebafc3637202bc94ae))
+
 # [1.1.0](https://github.com/suin/esa-openapi/compare/v1.0.0...v1.1.0) (2021-04-22)
 
 

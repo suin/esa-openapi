@@ -1,6 +1,6 @@
 {
   "name": "@suin/esa-openapi",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "esa.io APIのOpenAPI準拠の仕様書",
   "keywords": [
     "esa"
