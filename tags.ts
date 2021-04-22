@@ -1,6 +1,11 @@
 import { TagObject } from "openapi3-ts";
 
 const tags = $tags({
+  esa: {
+    description: "",
+    "x-displayName": " ",
+    "x-traitTag": true,
+  },
   category: {
     description: "記事のカテゴリの管理を行うAPIです。",
     "x-displayName": "カテゴリ",
@@ -45,8 +50,15 @@ const tags = $tags({
 
 type Tags = {
   readonly [K: string]: {
-    readonly description: string;
-    readonly ["x-displayName"]: string;
+    readonly description?: string;
+    /**
+     * ReDocのメニューに表示する文言
+     */
+    readonly ["x-displayName"]?: string;
+    /**
+     * ReDocのメニューに表示するかどうか
+     */
+    readonly ["x-traitTag"]?: boolean;
   };
 };
 

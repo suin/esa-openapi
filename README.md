@@ -61,13 +61,13 @@ npx @openapitools/openapi-generator-cli generate \
 クライアントは`client`ディレクトリに生成されます。これを TypeScript で使うには次のようにします:
 
 ```typescript
-import { Configuration, PostApi } from "./client";
+import { Configuration, EsaApi } from "./client";
 
 (async () => {
-  const postApi = new PostApi(
+  const esaApi = new EsaApi(
     new Configuration({ accessToken: process.env.ESA_API_TOKEN })
   );
-  const { data } = await postApi.getPosts({ teamName: "doc" });
+  const { data } = await esaApi.getPosts({ teamName: "doc" });
 
   for (const post of data.posts) {
     console.log(post.name);

@@ -6,6 +6,7 @@ import {
   TagObject,
 } from "openapi3-ts";
 import * as oa from "openapi3-ts/dist/model";
+import { PathItemObject } from "openapi3-ts/src/model/OpenApi";
 import { ParameterWithTitle, SchemaObjectWithTitle } from "./dsl";
 
 export class OpenApiBuilder extends ParentOpenApiBuilder {
@@ -45,6 +46,28 @@ export class OpenApiBuilder extends ParentOpenApiBuilder {
     const spec = this.getSpec();
     spec.security ??= [];
     spec.security.push(security);
+    return this;
+  }
+
+  addTagsToAllOperations(tag: string): this {
+    const spec = this.getSpec();
+    for (const path of Object.values<PathItemObject>(spec.paths)) {
+      for (const method of [
+        "get",
+        "post",
+        "patch",
+        "put",
+        "delete",
+        "head",
+        "options",
+        "trace",
+      ] as const) {
+        const operation = path[method];
+        if (operation && operation.tags) {
+          operation.tags.push(tag);
+        }
+      }
+    }
     return this;
   }
 }

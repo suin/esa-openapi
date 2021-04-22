@@ -38,7 +38,7 @@ import { team } from "./schemas/team";
 import { teamStats } from "./schemas/teamStats";
 import { user } from "./schemas/user";
 import { watcher } from "./schemas/watcher";
-import { tagObjects } from "./tags";
+import { tagObjects, tags } from "./tags";
 
 export async function getSpec(): Promise<OpenAPIObject> {
   const builder = new OpenApiBuilder()
@@ -142,7 +142,8 @@ export async function getSpec(): Promise<OpenAPIObject> {
     })
     .addSecurity({ AccessTokenHeader: [] })
     .addSecurity({ AccessTokenQueryParam: [] })
-    .addSecurity({ OAuth2: [] });
+    .addSecurity({ OAuth2: [] })
+    .addTagsToAllOperations(tags.esa);
 
   return builder.getSpec();
 }
