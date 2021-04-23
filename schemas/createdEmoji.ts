@@ -1,6 +1,6 @@
-import { SchemaObjectWithTitle } from "../dsl";
+import { schema } from "../dsl";
 
-export const createdEmoji: SchemaObjectWithTitle = {
+export const createdEmoji = schema({
   title: "CreatedEmoji",
   description: "新たに登録された絵文字を表します",
   type: "object",
@@ -12,4 +12,4 @@ export const createdEmoji: SchemaObjectWithTitle = {
     },
   },
   required: ["code"],
-};
+} as const);

@@ -7,7 +7,8 @@ import {
 } from "openapi3-ts";
 import * as oa from "openapi3-ts/dist/model";
 import { PathItemObject } from "openapi3-ts/src/model/OpenApi";
-import { ParameterWithTitle, SchemaObjectWithTitle } from "./dsl";
+import { ParameterWithTitle, Schema, SchemaObjectWithTitle } from "./dsl";
+import { writable } from "./writable";
 
 export class OpenApiBuilder extends ParentOpenApiBuilder {
   addTags(tags: ReadonlyArray<TagObject>): this {
@@ -35,9 +36,13 @@ export class OpenApiBuilder extends ParentOpenApiBuilder {
     return this;
   }
 
-  addSchemas(schemas: Array<SchemaObjectWithTitle>): this {
+  addSchemas(
+    schemas: Array<
+      SchemaObjectWithTitle | (Schema.All & { readonly title: string })
+    >
+  ): this {
     for (const schema of schemas) {
-      super.addSchema(schema.title, schema);
+      super.addSchema(schema.title, writable(schema));
     }
     return this;
   }

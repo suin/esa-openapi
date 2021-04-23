@@ -3,7 +3,7 @@ import { outdent } from "outdent";
 import { parameterRef, schemaRef } from "../../../dsl";
 import { teamName } from "../../../parameters/teamName";
 import { ok } from "../../../responses/ok";
-import { emailsToInvite } from "../../../schemas/emailsToInvite";
+import { inviteBody } from "../../../schemas/inviteBody";
 import { invitationList } from "../../../schemas/invitationList";
 import { tags } from "../../../tags";
 
@@ -33,7 +33,7 @@ const invitations: PathItemObject = {
     requestBody: {
       content: {
         "application/json": {
-          schema: schemaRef(emailsToInvite),
+          schema: schemaRef(inviteBody),
         },
       },
       required: true,

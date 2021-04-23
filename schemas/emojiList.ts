@@ -1,7 +1,7 @@
-import { SchemaObjectWithTitle, schemaRef } from "../dsl";
+import { schema, schemaRef } from "../dsl";
 import { emoji } from "./emoji";
 
-export const emojiList: SchemaObjectWithTitle = {
+export const emojiList = schema({
   title: "EmojiList",
   description: "絵文字のリストを表します",
   type: "object",
@@ -12,4 +12,4 @@ export const emojiList: SchemaObjectWithTitle = {
     },
   },
   required: ["emojis"],
-};
+} as const);

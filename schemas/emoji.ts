@@ -1,7 +1,7 @@
 import { outdent } from "outdent";
-import { SchemaObjectWithTitle } from "../dsl";
+import { schema } from "../dsl";
 
-export const emoji: SchemaObjectWithTitle = {
+export const emoji = schema({
   title: "Emoji",
   description: "絵文字を表します",
   type: "object",
@@ -35,4 +35,4 @@ export const emoji: SchemaObjectWithTitle = {
     },
   },
   required: ["code", "aliases", "category", "url"],
-};
+} as const);

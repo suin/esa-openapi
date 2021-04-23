@@ -14,15 +14,19 @@ import { batchMoveOptions } from "./schemas/batchMoveOptions";
 import { batchMoveResult } from "./schemas/batchMoveResult";
 import { comment } from "./schemas/comment";
 import { createdEmoji } from "./schemas/createdEmoji";
-import { editComment } from "./schemas/editComment";
+import { createPostBody } from "./schemas/createPostBody";
+import { newComment } from "./schemas/newComment";
+import { updateCommentBody } from "./schemas/updateCommentBody";
 import { editPost } from "./schemas/editPost";
-import { emailsToInvite } from "./schemas/emailsToInvite";
+import { updatePostBody } from "./schemas/updatePostBody";
+import { inviteBody } from "./schemas/inviteBody";
 import { emoji } from "./schemas/emoji";
 import { emojiList } from "./schemas/emojiList";
 import { invitation } from "./schemas/invitation";
 import { invitationList } from "./schemas/invitationList";
 import { member } from "./schemas/member";
-import { newComment } from "./schemas/newComment";
+import { createCommentBody } from "./schemas/createCommentBody";
+import { createEmojiBody } from "./schemas/createEmojiBody";
 import { newEmoji } from "./schemas/newEmoji";
 import { newPost } from "./schemas/newPost";
 import { newStar } from "./schemas/newStar";
@@ -77,14 +81,18 @@ export async function getSpec(): Promise<OpenAPIObject> {
       batchMoveOptions,
       batchMoveResult,
       comment,
+      createCommentBody,
+      createCommentBody,
+      createEmojiBody,
+      createEmojiBody,
+      createPostBody,
       createdEmoji,
-      editComment,
       editPost,
-      emailsToInvite,
       emoji,
       emojiList,
       invitation,
       invitationList,
+      inviteBody,
       member,
       newComment,
       newEmoji,
@@ -100,6 +108,8 @@ export async function getSpec(): Promise<OpenAPIObject> {
       stargazer,
       team,
       teamStats,
+      updateCommentBody,
+      updatePostBody,
       user,
       watcher,
     ])

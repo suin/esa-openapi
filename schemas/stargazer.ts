@@ -1,7 +1,7 @@
-import { SchemaObjectWithTitle, schemaRef } from "../dsl";
+import { schema, schemaRef } from "../dsl";
 import { user } from "./user";
 
-export const stargazer: SchemaObjectWithTitle = {
+export const stargazer = schema({
   title: "Stargazer",
   description: "記事にStarをしている人",
   type: "object",
@@ -18,10 +18,7 @@ export const stargazer: SchemaObjectWithTitle = {
       description: "引用Starの本文です。",
       example: null,
     },
-    user: {
-      allOf: [schemaRef(user)],
-      description: "Starをしたユーザです。",
-    },
+    user: schemaRef(user, "Starをしたユーザです。"),
   },
   required: ["created_at", "body", "user"],
-};
+} as const);

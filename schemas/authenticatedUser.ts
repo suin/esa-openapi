@@ -1,7 +1,7 @@
-import { SchemaObjectWithTitle, schemaRef } from "../dsl";
+import { schema, schemaRef } from "../dsl";
 import { team } from "./team";
 
-export const authenticatedUser: SchemaObjectWithTitle = {
+export const authenticatedUser = schema({
   title: "AuthenticatedUser",
   description: "現在のアクセストークンで認証中のユーザの情報を表します。",
   type: "object",
@@ -61,4 +61,4 @@ export const authenticatedUser: SchemaObjectWithTitle = {
     "icon",
     "email",
   ],
-};
+} as const);

@@ -1,6 +1,6 @@
-import { SchemaObjectWithTitle } from "../dsl";
+import { schema } from "../dsl";
 
-export const batchMoveOptions: SchemaObjectWithTitle = {
+export const batchMoveOptions = schema({
   title: "BatchMoveOptions",
   description: "",
   type: "object",
@@ -17,4 +17,4 @@ export const batchMoveOptions: SchemaObjectWithTitle = {
     },
   },
   required: ["from", "to"],
-};
+} as const);

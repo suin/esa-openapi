@@ -194,7 +194,7 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/EditComment" }
+              "schema": { "$ref": "#/components/schemas/updateCommentBody" }
             }
           },
           "required": true
@@ -391,10 +391,10 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/NewEmoji" }
+              "schema": { "$ref": "#/components/schemas/CreateEmojiBody" }
             },
             "multipart/form-data": {
-              "schema": { "$ref": "#/components/schemas/NewEmoji" }
+              "schema": { "$ref": "#/components/schemas/CreateEmojiBody" }
             }
           },
           "required": true
@@ -494,7 +494,7 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/EmailsToInvite" }
+              "schema": { "$ref": "#/components/schemas/InviteBody" }
             }
           },
           "required": true
@@ -702,7 +702,7 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/NewPost" }
+              "schema": { "$ref": "#/components/schemas/CreatePostBody" }
             }
           }
         },
@@ -774,7 +774,7 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/EditPost" }
+              "schema": { "$ref": "#/components/schemas/UpdatePostBody" }
             }
           },
           "required": true
@@ -876,7 +876,7 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/NewComment" }
+              "schema": { "$ref": "#/components/schemas/CreateCommentBody" }
             }
           },
           "required": true
@@ -1295,7 +1295,7 @@
           },
           "created_by": {
             "allOf": [{ "$ref": "#/components/schemas/User" }],
-            "description": "コメントを作成したユーザを表します。"
+            "description": "コメントを作成したユーザです"
           },
           "stargazers_count": {
             "type": "integer",
@@ -1324,6 +1324,28 @@
           "star"
         ]
       },
+      "CreateCommentBody": {
+        "title": "CreateCommentBody",
+        "type": "object",
+        "properties": {
+          "comment": { "$ref": "#/components/schemas/NewComment" }
+        },
+        "required": ["comment"]
+      },
+      "CreateEmojiBody": {
+        "title": "CreateEmojiBody",
+        "description": "新たに登録する絵文字を表します。",
+        "type": "object",
+        "properties": { "emoji": { "$ref": "#/components/schemas/NewEmoji" } },
+        "required": ["emoji"]
+      },
+      "CreatePostBody": {
+        "title": "CreatePostBody",
+        "description": "新たに投稿する記事を含んだリクエストボディです。",
+        "type": "object",
+        "properties": { "post": { "$ref": "#/components/schemas/NewPost" } },
+        "required": ["post"]
+      },
       "CreatedEmoji": {
         "title": "CreatedEmoji",
         "description": "新たに登録された絵文字を表します",
@@ -1337,121 +1359,77 @@
         },
         "required": ["code"]
       },
-      "EditComment": {
-        "title": "EditComment",
-        "type": "object",
-        "properties": {
-          "comment": {
-            "type": "object",
-            "properties": {
-              "body_md": { "type": "string" },
-              "user": {
-                "type": "string",
-                "description": "コメントの投稿者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することでコメントの投稿者を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
-                "example": "esa_bot"
-              }
-            }
-          }
-        },
-        "required": ["comment"]
-      },
       "EditPost": {
         "title": "EditPost",
-        "description": "記事の更新内容を表します。",
         "type": "object",
         "properties": {
-          "post": {
+          "name": {
+            "type": "string",
+            "description": "記事のタイトル\n\n-  タイトル自体に`#`を含めたい場合は`&#35;`, `/`を含めたい場合は`&#47;`へそれぞれ置換処理をお願いします。",
+            "example": "hi!"
+          },
+          "body_md": {
+            "type": "string",
+            "description": "Markdownで書かれた記事の本文です",
+            "example": "# Getting Started"
+          },
+          "tags": {
+            "type": "array",
+            "description": "記事に紐付けられたタグです。",
+            "items": { "type": "string" },
+            "example": ["api", "dev"]
+          },
+          "category": {
+            "type": "string",
+            "nullable": true,
+            "description": "記事が属するカテゴリです\n\n設定されていない場合は`null`になります",
+            "example": "日報/2015/05/09"
+          },
+          "wip": {
+            "type": "boolean",
+            "description": "記事がWIP(Working In Progress)状態かどうかを表します。",
+            "example": false,
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "description": "記事更新時の変更メモです。",
+            "example": "Add Getting Started section"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "記事の投稿者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することで記事の **作成者** を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
+            "example": "esa_bot"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "記事の更新者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することで記事の **更新者** を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
+            "example": "esa_bot"
+          },
+          "original_revision": {
+            "title": "OriginalRevision",
             "type": "object",
+            "description": "リクエストに正常な `post.body_md` パラメータと `post.original_revision.*` パラメータが存在する場合、記事更新時に3 way mergeが行われます。original_revisionパラメータが存在しない場合は、変更は常に後勝ちになります。\n\n> [release_note/2014/12/23/記事保存時の自動マージ - docs.esa.io](https://docs.esa.io/posts/35)",
             "properties": {
-              "name": {
-                "type": "string",
-                "description": "記事のタイトル\n\n-  タイトル自体に`#`を含めたい場合は`&#35;`, `/`を含めたい場合は`&#47;`へそれぞれ置換処理をお願いします。",
-                "example": "hi!"
-              },
               "body_md": {
                 "type": "string",
-                "description": "Markdownで書かれた記事の本文です",
+                "description": "変更前の記事の本文です",
                 "example": "# Getting Started"
               },
-              "tags": {
-                "type": "array",
-                "description": "記事に紐付けられたタグです。",
-                "items": { "type": "string" },
-                "example": ["api", "dev"]
+              "number": {
+                "type": "integer",
+                "description": "変更前の記事のrevision_numberを指定します",
+                "example": 1
               },
-              "category": {
+              "user": {
                 "type": "string",
-                "nullable": true,
-                "description": "記事が属するカテゴリです\n\n設定されていない場合は`null`になります",
-                "example": "日報/2015/05/09"
-              },
-              "wip": {
-                "type": "boolean",
-                "description": "記事がWIP(Working In Progress)状態かどうかを表します。",
-                "example": false,
-                "default": true
-              },
-              "message": {
-                "type": "string",
-                "description": "記事更新時の変更メモです。",
-                "example": "Add Getting Started section"
-              },
-              "created_by": {
-                "type": "string",
-                "description": "記事の投稿者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することで記事の **作成者** を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
+                "description": "変更前の記事の最終更新者のscreen_nameを指定します",
                 "example": "esa_bot"
-              },
-              "updated_by": {
-                "type": "string",
-                "description": "記事の更新者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することで記事の **更新者** を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
-                "example": "esa_bot"
-              },
-              "original_revision": {
-                "type": "object",
-                "description": "リクエストに正常な `post.body_md` パラメータと `post.original_revision.*` パラメータが存在する場合、記事更新時に3 way mergeが行われます。original_revisionパラメータが存在しない場合は、変更は常に後勝ちになります。\n\n> [release_note/2014/12/23/記事保存時の自動マージ - docs.esa.io](https://docs.esa.io/posts/35)",
-                "properties": {
-                  "body_md": {
-                    "type": "string",
-                    "description": "変更前の記事の本文です",
-                    "example": "# Getting Started"
-                  },
-                  "number": {
-                    "type": "integer",
-                    "description": "変更前の記事のrevision_numberを指定します",
-                    "example": 1
-                  },
-                  "user": {
-                    "type": "string",
-                    "description": "変更前の記事の最終更新者のscreen_nameを指定します",
-                    "example": "esa_bot"
-                  }
-                },
-                "required": ["body_md", "number", "user"]
-              }
-            }
-          }
-        },
-        "required": ["post"]
-      },
-      "EmailsToInvite": {
-        "title": "EmailsToInvite",
-        "description": "招待したいメンバーのEメールアドレスを表します",
-        "type": "object",
-        "properties": {
-          "member": {
-            "type": "object",
-            "properties": {
-              "emails": {
-                "type": "array",
-                "description": "招待したいメンバーのEメールアドレスです",
-                "items": { "type": "string", "format": "email" },
-                "example": ["foo@example.com", "bar@example.com"]
               }
             },
-            "required": ["emails"]
+            "required": ["body_md", "number", "user"]
           }
-        },
-        "required": ["member"]
+        }
       },
       "Emoji": {
         "title": "Emoji",
@@ -1538,6 +1516,27 @@
         },
         "required": ["invitations"]
       },
+      "InviteBody": {
+        "title": "InviteBody",
+        "description": "招待したいメンバーのEメールアドレスを表します",
+        "type": "object",
+        "properties": {
+          "member": {
+            "title": "EmailsToInvite",
+            "type": "object",
+            "properties": {
+              "emails": {
+                "type": "array",
+                "description": "招待したいメンバーのEメールアドレスです",
+                "items": { "type": "string", "format": "email" },
+                "example": ["foo@example.com", "bar@example.com"]
+              }
+            },
+            "required": ["emails"]
+          }
+        },
+        "required": ["member"]
+      },
       "Member": {
         "title": "Member",
         "description": "チームのメンバーを表します。",
@@ -1609,106 +1608,87 @@
         "title": "NewComment",
         "type": "object",
         "properties": {
-          "comment": {
-            "type": "object",
-            "properties": {
-              "body_md": { "type": "string" },
-              "user": {
-                "type": "string",
-                "description": "コメントの投稿者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することでコメントの投稿者を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
-                "example": "esa_bot"
-              }
-            },
-            "required": ["body_md"]
+          "body_md": { "type": "string" },
+          "user": {
+            "type": "string",
+            "description": "コメントの投稿者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することでコメントの投稿者を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
+            "example": "esa_bot"
           }
         },
-        "required": ["comment"]
+        "required": ["body_md"]
       },
       "NewEmoji": {
         "title": "NewEmoji",
-        "description": "新たに登録する絵文字を表します。",
         "type": "object",
         "properties": {
-          "emoji": {
-            "type": "object",
-            "properties": {
-              "code": {
-                "type": "string",
-                "description": "登録したい絵文字のコードです。絵文字を入力する際の両端の**:**を含めずに指定して下さい。",
-                "example": "team_emoji"
-              },
-              "origin_code": {
-                "type": "string",
-                "description": "既に登録されている絵文字に対するエイリアス絵文字を作成する際に指定して下さい。"
-              },
-              "image": {
-                "type": "string",
-                "format": "binary",
-                "description": "絵文字の画像データです。\n\n- BASE64でencodeしたStringを指定して下さい。\n- 新しい絵文字を作成する場合に指定して下さい。エイリアス絵文字を作成する際には不要です。\n- 画像の条件\n  - 64KB以下\n  - 128px x 128px以上\n  - GIF or PNG",
-                "example": "BASE64 String"
-              }
-            },
-            "required": ["code"]
+          "code": {
+            "type": "string",
+            "description": "登録したい絵文字のコードです。絵文字を入力する際の両端の**:**を含めずに指定して下さい。",
+            "example": "team_emoji"
+          },
+          "origin_code": {
+            "type": "string",
+            "description": "既に登録されている絵文字に対するエイリアス絵文字を作成する際に指定して下さい。"
+          },
+          "image": {
+            "type": "string",
+            "format": "binary",
+            "description": "絵文字の画像データです。\n\n- BASE64でencodeしたStringを指定して下さい。\n- 新しい絵文字を作成する場合に指定して下さい。エイリアス絵文字を作成する際には不要です。\n- 画像の条件\n  - 64KB以下\n  - 128px x 128px以上\n  - GIF or PNG",
+            "example": "BASE64 String"
           }
         },
-        "required": ["emoji"]
+        "required": ["code"]
       },
       "NewPost": {
         "title": "NewPost",
         "description": "新たに投稿する記事を表します。",
         "type": "object",
         "properties": {
-          "post": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "記事のタイトル\n\n-  タイトル自体に`#`を含めたい場合は`&#35;`, `/`を含めたい場合は`&#47;`へそれぞれ置換処理をお願いします。",
-                "example": "hi!"
-              },
-              "body_md": {
-                "type": "string",
-                "description": "Markdownで書かれた記事の本文です",
-                "example": "# Getting Started"
-              },
-              "tags": {
-                "type": "array",
-                "description": "記事に紐付けられたタグです。",
-                "items": { "type": "string" },
-                "example": ["api", "dev"]
-              },
-              "category": {
-                "type": "string",
-                "nullable": true,
-                "description": "記事が属するカテゴリです\n\n設定されていない場合は`null`になります",
-                "example": "日報/2015/05/09"
-              },
-              "wip": {
-                "type": "boolean",
-                "description": "記事がWIP(Working In Progress)状態かどうかを表します。",
-                "example": false,
-                "default": true
-              },
-              "message": {
-                "type": "string",
-                "description": "記事更新時の変更メモです。",
-                "example": "Add Getting Started section"
-              },
-              "user": {
-                "type": "string",
-                "description": "記事の投稿者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することで記事の投稿者を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
-                "example": "esa_bot"
-              },
-              "template_post_id": {
-                "type": "integer",
-                "description": "チーム内のテンプレート記事のID(URLのこの部分: /posts/**{id}**)を指定すると、そのテンプレートが適用された**name**と**body**を持つ記事を作成することが出来ます。",
-                "example": 2
-              }
-            },
-            "required": ["name"]
+          "name": {
+            "type": "string",
+            "description": "記事のタイトル\n\n-  タイトル自体に`#`を含めたい場合は`&#35;`, `/`を含めたい場合は`&#47;`へそれぞれ置換処理をお願いします。",
+            "example": "hi!"
+          },
+          "body_md": {
+            "type": "string",
+            "description": "Markdownで書かれた記事の本文です",
+            "example": "# Getting Started"
+          },
+          "tags": {
+            "type": "array",
+            "description": "記事に紐付けられたタグです。",
+            "items": { "type": "string" },
+            "example": ["api", "dev"]
+          },
+          "category": {
+            "type": "string",
+            "nullable": true,
+            "description": "記事が属するカテゴリです\n\n設定されていない場合は`null`になります",
+            "example": "日報/2015/05/09"
+          },
+          "wip": {
+            "type": "boolean",
+            "description": "記事がWIP(Working In Progress)状態かどうかを表します。",
+            "example": false,
+            "default": true
+          },
+          "message": {
+            "type": "string",
+            "description": "記事更新時の変更メモです。",
+            "example": "Add Getting Started section"
+          },
+          "user": {
+            "type": "string",
+            "description": "記事の投稿者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することで記事の投稿者を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
+            "example": "esa_bot"
+          },
+          "template_post_id": {
+            "type": "integer",
+            "description": "チーム内のテンプレート記事のID(URLのこの部分: /posts/**{id}**)を指定すると、そのテンプレートが適用された**name**と**body**を持つ記事を作成することが出来ます。",
+            "example": 2
           }
         },
-        "required": ["post"]
+        "required": ["name"]
       },
       "NewStar": {
         "title": "NewStar",
@@ -2159,6 +2139,7 @@
             "example": true
           },
           "sharing_urls": {
+            "title": "SharingUrls",
             "type": "object",
             "description": "外部公開のURLです。外部公開が有効になっていない場合`null`になります。",
             "nullable": true,
@@ -2336,6 +2317,32 @@
           "weekly_active_users",
           "monthly_active_users"
         ]
+      },
+      "updateCommentBody": {
+        "title": "updateCommentBody",
+        "type": "object",
+        "properties": {
+          "comment": {
+            "title": "EditComment",
+            "type": "object",
+            "properties": {
+              "body_md": { "type": "string" },
+              "user": {
+                "type": "string",
+                "description": "コメントの投稿者\n\n- チームメンバーのscreen_nameもしくは \"esa_bot\" を指定することでコメントの投稿者を上書きすることができます。\n- このパラメータは **team の owner** だけ が使用することができます。",
+                "example": "esa_bot"
+              }
+            }
+          }
+        },
+        "required": ["comment"]
+      },
+      "UpdatePostBody": {
+        "title": "UpdatePostBody",
+        "description": "記事の更新内容を表します。",
+        "type": "object",
+        "properties": { "post": { "$ref": "#/components/schemas/EditPost" } },
+        "required": ["post"]
       },
       "User": {
         "title": "User",

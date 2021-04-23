@@ -1,6 +1,6 @@
-import { SchemaObjectWithTitle } from "../dsl";
+import { schema } from "../dsl";
 
-export const user: SchemaObjectWithTitle = {
+export const user = schema({
   title: "User",
   description:
     "記事を作成したユーザ、記事を最後に更新したユーザ、コメントを作成したユーザ、スターをしたユーザなどを表します。",
@@ -30,4 +30,4 @@ export const user: SchemaObjectWithTitle = {
     },
   },
   required: ["myself", "name", "screen_name", "icon"],
-};
+} as const);

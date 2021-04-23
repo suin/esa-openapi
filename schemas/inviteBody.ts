@@ -1,11 +1,12 @@
-import { SchemaObjectWithTitle } from "../dsl";
+import { schema } from "../dsl";
 
-export const emailsToInvite: SchemaObjectWithTitle = {
-  title: "EmailsToInvite",
+export const inviteBody = schema({
+  title: "InviteBody",
   description: "招待したいメンバーのEメールアドレスを表します",
   type: "object",
   properties: {
     member: {
+      title: "EmailsToInvite",
       type: "object",
       properties: {
         emails: {
@@ -22,4 +23,4 @@ export const emailsToInvite: SchemaObjectWithTitle = {
     },
   },
   required: ["member"],
-};
+} as const);

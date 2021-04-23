@@ -1,8 +1,8 @@
-import { SchemaObjectWithTitle, schemaRef } from "../dsl";
+import { schema, schemaRef } from "../dsl";
 import { stargazer } from "./stargazer";
 import { user } from "./user";
 
-export const comment: SchemaObjectWithTitle = {
+export const comment = schema({
   title: "Comment",
   description: "ユーザが作成したコメントを表します。",
   type: "object",
@@ -38,10 +38,7 @@ export const comment: SchemaObjectWithTitle = {
       format: "url",
       description: "コメントのpermalinkです",
     },
-    created_by: {
-      allOf: [schemaRef(user)],
-      description: "コメントを作成したユーザを表します。",
-    },
+    created_by: schemaRef(user, "コメントを作成したユーザです"),
     stargazers_count: {
       type: "integer",
       description: "コメントにStarをしている人数を表します",
@@ -68,4 +65,4 @@ export const comment: SchemaObjectWithTitle = {
     "stargazers_count",
     "star",
   ],
-};
+} as const);

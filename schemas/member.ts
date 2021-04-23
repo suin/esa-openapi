@@ -1,6 +1,6 @@
-import { SchemaObjectWithTitle } from "../dsl";
+import { schema } from "../dsl";
 
-export const member: SchemaObjectWithTitle = {
+export const member = schema({
   title: "Member",
   description: "チームのメンバーを表します。",
   type: "object",
@@ -68,4 +68,4 @@ export const member: SchemaObjectWithTitle = {
     "joined_at",
     "last_accessed_at",
   ],
-};
+} as const);

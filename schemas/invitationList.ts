@@ -1,7 +1,7 @@
-import { SchemaObjectWithTitle, schemaRef } from "../dsl";
+import { schema, schemaRef } from "../dsl";
 import { invitation } from "./invitation";
 
-export const invitationList: SchemaObjectWithTitle = {
+export const invitationList = schema({
   title: "InvitationList",
   description: "Emailによる招待のリストを表します",
   type: "object",
@@ -12,4 +12,4 @@ export const invitationList: SchemaObjectWithTitle = {
     },
   },
   required: ["invitations"],
-};
+} as const);

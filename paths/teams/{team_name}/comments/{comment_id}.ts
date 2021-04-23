@@ -5,7 +5,7 @@ import { teamName } from "../../../../parameters/teamName";
 import { noContent } from "../../../../responses/noContent";
 import { ok } from "../../../../responses/ok";
 import { comment as commentSchema } from "../../../../schemas/comment";
-import { editComment } from "../../../../schemas/editComment";
+import { updateCommentBody } from "../../../../schemas/updateCommentBody";
 import { tags } from "../../../../tags";
 
 const comment: PathItemObject = {
@@ -41,7 +41,7 @@ const comment: PathItemObject = {
     requestBody: {
       content: {
         "application/json": {
-          schema: schemaRef(editComment),
+          schema: schemaRef(updateCommentBody),
         },
       },
       required: true,

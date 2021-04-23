@@ -5,7 +5,7 @@ import { postNumber } from "../../../../parameters/postNumber";
 import { teamName } from "../../../../parameters/teamName";
 import { noContent } from "../../../../responses/noContent";
 import { ok } from "../../../../responses/ok";
-import { editPost } from "../../../../schemas/editPost";
+import { updatePostBody } from "../../../../schemas/updatePostBody";
 import { post as postSchema } from "../../../../schemas/post";
 import { tags } from "../../../../tags";
 
@@ -33,7 +33,7 @@ const post: PathItemObject = {
     requestBody: {
       content: {
         "application/json": {
-          schema: schemaRef(editPost),
+          schema: schemaRef(updatePostBody),
         },
       },
       required: true,

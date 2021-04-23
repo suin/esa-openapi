@@ -5,7 +5,7 @@ import { postNumber } from "../../../../../parameters/postNumber";
 import { teamName } from "../../../../../parameters/teamName";
 import { ok } from "../../../../../responses/ok";
 import { comment } from "../../../../../schemas/comment";
-import { newComment } from "../../../../../schemas/newComment";
+import { createCommentBody } from "../../../../../schemas/createCommentBody";
 import { paginatedComments } from "../../../../../schemas/paginatedComments";
 import { tags } from "../../../../../tags";
 
@@ -37,7 +37,7 @@ const comments: PathItemObject = {
     requestBody: {
       content: {
         "application/json": {
-          schema: schemaRef(newComment),
+          schema: schemaRef(createCommentBody),
         },
       },
       required: true,

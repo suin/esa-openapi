@@ -6,7 +6,7 @@ import { order } from "../../../parameters/order";
 import { pagination } from "../../../parameters/pagination";
 import { teamName } from "../../../parameters/teamName";
 import { ok } from "../../../responses/ok";
-import { newPost } from "../../../schemas/newPost";
+import { createPostBody } from "../../../schemas/createPostBody";
 import { paginatedPosts } from "../../../schemas/paginatedPosts";
 import { post } from "../../../schemas/post";
 import { tags } from "../../../tags";
@@ -77,7 +77,7 @@ const posts: PathItemObject = {
       required: true,
       content: {
         "application/json": {
-          schema: schemaRef(newPost),
+          schema: schemaRef(createPostBody),
         },
       },
     },

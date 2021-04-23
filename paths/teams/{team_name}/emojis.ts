@@ -4,7 +4,7 @@ import { teamName } from "../../../parameters/teamName";
 import { ok } from "../../../responses/ok";
 import { createdEmoji } from "../../../schemas/createdEmoji";
 import { emojiList } from "../../../schemas/emojiList";
-import { newEmoji } from "../../../schemas/newEmoji";
+import { createEmojiBody } from "../../../schemas/createEmojiBody";
 import { tags } from "../../../tags";
 
 const emojis: PathItemObject = {
@@ -41,10 +41,10 @@ const emojis: PathItemObject = {
     requestBody: {
       content: {
         "application/json": {
-          schema: schemaRef(newEmoji),
+          schema: schemaRef(createEmojiBody),
         },
         "multipart/form-data": {
-          schema: schemaRef(newEmoji),
+          schema: schemaRef(createEmojiBody),
         },
       },
       required: true,

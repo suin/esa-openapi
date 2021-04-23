@@ -1,7 +1,7 @@
 import { outdent } from "outdent";
-import { SchemaObjectWithTitle } from "../dsl";
+import { schema } from "../dsl";
 
-export const invitation: SchemaObjectWithTitle = {
+export const invitation = schema({
   title: "Invitation",
   description: "Emailによる招待を表します。",
   type: "object",
@@ -35,4 +35,4 @@ export const invitation: SchemaObjectWithTitle = {
     },
   },
   required: ["email", "code", "expires_at", "url"],
-};
+} as const);

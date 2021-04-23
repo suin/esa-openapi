@@ -1,10 +1,10 @@
 import { outdent } from "outdent";
-import { SchemaObjectWithTitle, schemaRef } from "../dsl";
+import { schema, schemaRef } from "../dsl";
 import { comment } from "./comment";
 import { stargazer } from "./stargazer";
 import { user } from "./user";
 
-export const post: SchemaObjectWithTitle = {
+export const post = schema({
   title: "Post",
   description: "ユーザが作成した記事を表します。",
   type: "object",
@@ -85,14 +85,8 @@ export const post: SchemaObjectWithTitle = {
       description: "記事のリビジョン番号です。",
       example: 47,
     },
-    created_by: {
-      allOf: [schemaRef(user)],
-      description: "記事を作成したユーザを表します。",
-    },
-    updated_by: {
-      allOf: [schemaRef(user)],
-      description: "記事を最後に更新したユーザを表します。",
-    },
+    created_by: schemaRef(user, "記事を作成したユーザを表します。"),
+    updated_by: schemaRef(user, "記事を最後に更新したユーザを表します。"),
     kind: {
       type: "string",
       enum: ["stock", "flow"],
@@ -135,6 +129,7 @@ export const post: SchemaObjectWithTitle = {
       example: true,
     },
     sharing_urls: {
+      title: "SharingUrls",
       type: "object",
       description:
         "外部公開のURLです。外部公開が有効になっていない場合`null`になります。",
@@ -192,4 +187,4 @@ export const post: SchemaObjectWithTitle = {
     "watch",
     "sharing_urls",
   ],
-};
+} as const);

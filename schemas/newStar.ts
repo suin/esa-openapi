@@ -1,6 +1,6 @@
-import { SchemaObjectWithTitle } from "../dsl";
+import { schema } from "../dsl";
 
-export const newStar: SchemaObjectWithTitle = {
+export const newStar = schema({
   title: "NewStar",
   description: "新たにStarする内容を表します。",
   type: "object",
@@ -11,4 +11,4 @@ export const newStar: SchemaObjectWithTitle = {
       example: "foo bar",
     },
   },
-};
+} as const);

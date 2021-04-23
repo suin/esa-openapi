@@ -1,21 +1,20 @@
-import { ReferenceObject, SchemaObject } from "openapi3-ts";
-import { SchemaObjectWithTitle } from "../dsl";
 import pluralize from "pluralize";
+import { schema, Schema } from "../dsl";
 
-export const paginatedObjects = (
+export const paginatedObjects = <T extends Schema.All | Schema.Reference>(
   key: string,
   name: string,
-  schema: SchemaObject | ReferenceObject
-): SchemaObjectWithTitle => {
-  return {
+  _schema: T
+) => {
+  return schema({
     title: `Paginated${pluralize(name)}`,
     type: "object",
     properties: {
       [key]: {
         type: "array",
         description: `${name}のリスト`,
-        items: schema,
-      },
+        items: _schema,
+      } as any,
       prev_page: {
         type: "integer",
         nullable: true,
@@ -58,5 +57,5 @@ export const paginatedObjects = (
       "per_page",
       "max_per_page",
     ],
-  };
+  } as const);
 };
