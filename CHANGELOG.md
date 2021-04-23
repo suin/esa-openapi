@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/suin/esa-openapi/compare/v1.1.1...v2.0.0) (2021-04-23)
+
+
+### Features
+
+* 🎸 スキーマ定義を型安全にしつつ命名を見直しました ([a163b14](https://github.com/suin/esa-openapi/commit/a163b1412153dd91efe1563e3599a0548b17714f))
+
+
+### BREAKING CHANGES
+
+* 🧨 一部のスキーマ名が変更されたため下位互換性がありません
+
 ## [1.1.1](https://github.com/suin/esa-openapi/compare/v1.1.0...v1.1.1) (2021-04-22)
 
 
