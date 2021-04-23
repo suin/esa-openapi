@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/suin/esa-openapi/compare/v2.0.0...v2.1.0) (2021-04-23)
+
+
+### Features
+
+* 🎸 writeスコープの認可が必要なパスを明記しました ([8ba8ebc](https://github.com/suin/esa-openapi/commit/8ba8ebc8a69952fb9724cacb3bb2be7efe005081))
+
 # [2.0.0](https://github.com/suin/esa-openapi/compare/v1.1.1...v2.0.0) (2021-04-23)
 
 
