@@ -7,6 +7,7 @@ import { noContent } from "../../../../responses/noContent";
 import { ok } from "../../../../responses/ok";
 import { updatePostBody } from "../../../../schemas/updatePostBody";
 import { post as postSchema } from "../../../../schemas/post";
+import { scope } from "../../../../security";
 import { tags } from "../../../../tags";
 
 const post: PathItemObject = {
@@ -29,6 +30,7 @@ const post: PathItemObject = {
     description: "指定された記事を編集します。",
     operationId: "updatePost",
     tags: [tags.post],
+    security: scope.write,
     parameters: [parameterRef(teamName), parameterRef(postNumber)],
     requestBody: {
       content: {
@@ -47,6 +49,7 @@ const post: PathItemObject = {
     description: "指定された記事を削除します。",
     operationId: "deletePost",
     tags: [tags.post],
+    security: scope.write,
     parameters: [parameterRef(teamName), parameterRef(postNumber)],
     responses: {
       "204": noContent,

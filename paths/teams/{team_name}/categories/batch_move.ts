@@ -4,6 +4,7 @@ import { teamName } from "../../../../parameters/teamName";
 import { ok } from "../../../../responses/ok";
 import { batchMoveOptions } from "../../../../schemas/batchMoveOptions";
 import { batchMoveResult } from "../../../../schemas/batchMoveResult";
+import { scope } from "../../../../security";
 import { tags } from "../../../../tags";
 
 const batchMove: PathItemObject = {
@@ -12,6 +13,7 @@ const batchMove: PathItemObject = {
     description: "指定されたカテゴリを配下のカテゴリを含めて一括で変更します。",
     operationId: "batchMoveCategory",
     tags: [tags.category],
+    security: scope.write,
     parameters: [parameterRef(teamName)],
     requestBody: {
       content: {

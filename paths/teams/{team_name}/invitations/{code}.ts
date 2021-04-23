@@ -3,6 +3,7 @@ import { outdent } from "outdent";
 import { parameterRef } from "../../../../dsl";
 import { teamName } from "../../../../parameters/teamName";
 import { noContent } from "../../../../responses/noContent";
+import { scope } from "../../../../security";
 import { tags } from "../../../../tags";
 
 const invitation: PathItemObject = {
@@ -13,6 +14,7 @@ const invitation: PathItemObject = {
       このAPIは**team**の**owner**だけがご利用可能です。`,
     operationId: "disinvite",
     tags: [tags.invitation],
+    security: scope.write,
     parameters: [
       parameterRef(teamName),
       {

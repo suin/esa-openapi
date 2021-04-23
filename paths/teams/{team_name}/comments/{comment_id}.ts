@@ -6,6 +6,7 @@ import { noContent } from "../../../../responses/noContent";
 import { ok } from "../../../../responses/ok";
 import { comment as commentSchema } from "../../../../schemas/comment";
 import { updateCommentBody } from "../../../../schemas/updateCommentBody";
+import { scope } from "../../../../security";
 import { tags } from "../../../../tags";
 
 const comment: PathItemObject = {
@@ -37,6 +38,7 @@ const comment: PathItemObject = {
     description: "指定されたコメントを更新します。",
     operationId: "updateComment",
     tags: [tags.comment],
+    security: scope.write,
     parameters: [parameterRef(teamName), parameterRef(commentId)],
     requestBody: {
       content: {
@@ -55,6 +57,7 @@ const comment: PathItemObject = {
     description: "指定されたコメントを削除します。",
     operationId: "deleteComment",
     tags: [tags.comment],
+    security: scope.write,
     parameters: [parameterRef(teamName), parameterRef(commentId)],
     responses: {
       "204": noContent,

@@ -7,6 +7,7 @@ import { ok } from "../../../../../responses/ok";
 import { comment } from "../../../../../schemas/comment";
 import { createCommentBody } from "../../../../../schemas/createCommentBody";
 import { paginatedComments } from "../../../../../schemas/paginatedComments";
+import { scope } from "../../../../../security";
 import { tags } from "../../../../../tags";
 
 const comments: PathItemObject = {
@@ -29,6 +30,7 @@ const comments: PathItemObject = {
     description: "記事に新しいコメントを作成します。",
     operationId: "createComment",
     tags: [tags.comment],
+    security: scope.write,
     parameters: [
       parameterRef(teamName),
       parameterRef(postNumber),

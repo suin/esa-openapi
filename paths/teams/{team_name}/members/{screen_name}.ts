@@ -3,6 +3,7 @@ import { outdent } from "outdent";
 import { parameterRef } from "../../../../dsl";
 import { teamName } from "../../../../parameters/teamName";
 import { noContent } from "../../../../responses/noContent";
+import { scope } from "../../../../security";
 import { tags } from "../../../../tags";
 
 const member: PathItemObject = {
@@ -16,6 +17,7 @@ const member: PathItemObject = {
           `.trim(),
     operationId: "deleteMember",
     tags: [tags.member],
+    security: scope.write,
     parameters: [
       parameterRef(teamName),
       {

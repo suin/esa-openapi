@@ -3,6 +3,7 @@ import { parameterRef } from "../../../../../dsl";
 import { postNumber } from "../../../../../parameters/postNumber";
 import { teamName } from "../../../../../parameters/teamName";
 import { noContent } from "../../../../../responses/noContent";
+import { scope } from "../../../../../security";
 import { tags } from "../../../../../tags";
 
 const watch: PathItemObject = {
@@ -11,6 +12,7 @@ const watch: PathItemObject = {
     description: "指定された記事にWatchをします。",
     operationId: "watchPost",
     tags: [tags.watch],
+    security: scope.write,
     parameters: [parameterRef(teamName), parameterRef(postNumber)],
     responses: {
       "204": noContent,
@@ -21,6 +23,7 @@ const watch: PathItemObject = {
     description: "指定された記事へのWatchを取り消します。",
     operationId: "unwachPost",
     tags: [tags.watch],
+    security: scope.write,
     parameters: [parameterRef(teamName), parameterRef(postNumber)],
     responses: {
       "204": noContent,

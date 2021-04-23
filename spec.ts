@@ -150,9 +150,9 @@ export async function getSpec(): Promise<OpenAPIObject> {
         api.esa.io/v1/teams?access_token=1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
         \`\`\``,
     })
-    .addSecurity({ AccessTokenHeader: [] })
-    .addSecurity({ AccessTokenQueryParam: [] })
-    .addSecurity({ OAuth2: [] })
+    .addSecurity({ AccessTokenHeader: ["read"] })
+    .addSecurity({ AccessTokenQueryParam: ["read"] })
+    .addSecurity({ OAuth2: ["read"] })
     .addTagsToAllOperations(tags.esa);
 
   return builder.getSpec();

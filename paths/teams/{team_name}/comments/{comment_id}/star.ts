@@ -4,6 +4,7 @@ import { commentId } from "../../../../../parameters/commentId";
 import { teamName } from "../../../../../parameters/teamName";
 import { noContent } from "../../../../../responses/noContent";
 import { newStar } from "../../../../../schemas/newStar";
+import { scope } from "../../../../../security";
 import { tags } from "../../../../../tags";
 
 const star: PathItemObject = {
@@ -12,6 +13,7 @@ const star: PathItemObject = {
     description: "指定されたコメントにStarをします。",
     operationId: "starComment",
     tags: [tags.star],
+    security: scope.write,
     parameters: [parameterRef(teamName), parameterRef(commentId)],
     requestBody: {
       content: {
@@ -30,6 +32,7 @@ const star: PathItemObject = {
     description: "指定されたコメントへのStarを取り消します。",
     operationId: "unstarComment",
     tags: [tags.star],
+    security: scope.write,
     parameters: [parameterRef(teamName), parameterRef(commentId)],
     responses: {
       "204": noContent,

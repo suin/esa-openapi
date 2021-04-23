@@ -5,6 +5,7 @@ import { ok } from "../../../responses/ok";
 import { createdEmoji } from "../../../schemas/createdEmoji";
 import { emojiList } from "../../../schemas/emojiList";
 import { createEmojiBody } from "../../../schemas/createEmojiBody";
+import { scope } from "../../../security";
 import { tags } from "../../../tags";
 
 const emojis: PathItemObject = {
@@ -37,6 +38,7 @@ const emojis: PathItemObject = {
     description: "新しい絵文字を登録します。",
     operationId: "createEmoji",
     tags: [tags.emoji],
+    security: scope.write,
     parameters: [parameterRef(teamName)],
     requestBody: {
       content: {

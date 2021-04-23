@@ -9,6 +9,7 @@ import { ok } from "../../../responses/ok";
 import { createPostBody } from "../../../schemas/createPostBody";
 import { paginatedPosts } from "../../../schemas/paginatedPosts";
 import { post } from "../../../schemas/post";
+import { scope } from "../../../security";
 import { tags } from "../../../tags";
 
 const posts: PathItemObject = {
@@ -72,6 +73,7 @@ const posts: PathItemObject = {
     summary: "記事を投稿する",
     operationId: "createPost",
     tags: [tags.post],
+    security: scope.write,
     parameters: [parameterRef(teamName)],
     requestBody: {
       required: true,

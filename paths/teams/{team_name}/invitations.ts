@@ -5,6 +5,7 @@ import { teamName } from "../../../parameters/teamName";
 import { ok } from "../../../responses/ok";
 import { inviteBody } from "../../../schemas/inviteBody";
 import { invitationList } from "../../../schemas/invitationList";
+import { scope } from "../../../security";
 import { tags } from "../../../tags";
 
 const invitations: PathItemObject = {
@@ -29,6 +30,7 @@ const invitations: PathItemObject = {
       このAPIは**team**の**owner**だけがご利用可能です。`,
     operationId: "invite",
     tags: [tags.invitation],
+    security: scope.write,
     parameters: [parameterRef(teamName)],
     requestBody: {
       content: {

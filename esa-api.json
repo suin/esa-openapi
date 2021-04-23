@@ -78,6 +78,11 @@
         "description": "指定されたカテゴリを配下のカテゴリを含めて一括で変更します。",
         "operationId": "batchMoveCategory",
         "tags": ["category", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [{ "$ref": "#/components/parameters/teamName" }],
         "requestBody": {
           "content": {
@@ -187,6 +192,11 @@
         "description": "指定されたコメントを更新します。",
         "operationId": "updateComment",
         "tags": ["comment", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/commentId" }
@@ -226,6 +236,11 @@
         "description": "指定されたコメントを削除します。",
         "operationId": "deleteComment",
         "tags": ["comment", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/commentId" }
@@ -254,6 +269,11 @@
         "description": "指定されたコメントにStarをします。",
         "operationId": "starComment",
         "tags": ["star", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/commentId" }
@@ -288,6 +308,11 @@
         "description": "指定されたコメントへのStarを取り消します。",
         "operationId": "unstarComment",
         "tags": ["star", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/commentId" }
@@ -387,6 +412,11 @@
         "description": "新しい絵文字を登録します。",
         "operationId": "createEmoji",
         "tags": ["emoji", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [{ "$ref": "#/components/parameters/teamName" }],
         "requestBody": {
           "content": {
@@ -428,6 +458,11 @@
         "description": "登録したチーム固有の絵文字を削除します。",
         "operationId": "deleteEmoji",
         "tags": ["emoji", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           {
@@ -490,6 +525,11 @@
         "description": "招待したいメンバーへ個別の招待URLを発行し、指定したEメールアドレスへ送信します。\n\nこのAPIは**team**の**owner**だけがご利用可能です。",
         "operationId": "invite",
         "tags": ["invitation", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [{ "$ref": "#/components/parameters/teamName" }],
         "requestBody": {
           "content": {
@@ -528,6 +568,11 @@
         "description": "招待中のメンバーの招待を削除します。招待時に送信されたメールに記載された招待用のURLは無効となります。\nこのAPIは**team**の**owner**だけがご利用可能です。",
         "operationId": "disinvite",
         "tags": ["invitation", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           {
@@ -608,6 +653,11 @@
         "description": "指定した screen_name のメンバーをチームから削除します。\n\n- チームの owner である必要があります\n- APIで自分自身をチームから削除することはできません。",
         "operationId": "deleteMember",
         "tags": ["member", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           {
@@ -697,6 +747,11 @@
         "summary": "記事を投稿する",
         "operationId": "createPost",
         "tags": ["post", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [{ "$ref": "#/components/parameters/teamName" }],
         "requestBody": {
           "required": true,
@@ -767,6 +822,11 @@
         "description": "指定された記事を編集します。",
         "operationId": "updatePost",
         "tags": ["post", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/postNumber" }
@@ -806,6 +866,11 @@
         "description": "指定された記事を削除します。",
         "operationId": "deletePost",
         "tags": ["post", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/postNumber" }
@@ -867,6 +932,11 @@
         "description": "記事に新しいコメントを作成します。",
         "operationId": "createComment",
         "tags": ["comment", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/postNumber" },
@@ -910,6 +980,11 @@
         "description": "指定された記事にStarをします。",
         "operationId": "starPost",
         "tags": ["star", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/postNumber" }
@@ -944,6 +1019,11 @@
         "description": "指定された記事へのStarを取り消します。",
         "operationId": "unstarPost",
         "tags": ["star", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/postNumber" }
@@ -1007,6 +1087,11 @@
         "description": "指定された記事にWatchをします。",
         "operationId": "watchPost",
         "tags": ["watch", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/postNumber" }
@@ -1033,6 +1118,11 @@
         "description": "指定された記事へのWatchを取り消します。",
         "operationId": "unwachPost",
         "tags": ["watch", "esa"],
+        "security": [
+          { "OAuth2": ["write"] },
+          { "AccessTokenHeader": ["write"] },
+          { "AccessTokenQueryParam": ["write"] }
+        ],
         "parameters": [
           { "$ref": "#/components/parameters/teamName" },
           { "$ref": "#/components/parameters/postNumber" }
@@ -2564,8 +2654,8 @@
     "url": "https://docs.esa.io/posts/102"
   },
   "security": [
-    { "AccessTokenHeader": [] },
-    { "AccessTokenQueryParam": [] },
-    { "OAuth2": [] }
+    { "AccessTokenHeader": ["read"] },
+    { "AccessTokenQueryParam": ["read"] },
+    { "OAuth2": ["read"] }
   ]
 }

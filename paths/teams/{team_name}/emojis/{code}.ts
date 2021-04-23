@@ -2,6 +2,7 @@ import { PathItemObject } from "openapi3-ts";
 import { parameterRef } from "../../../../dsl";
 import { teamName } from "../../../../parameters/teamName";
 import { noContent } from "../../../../responses/noContent";
+import { scope } from "../../../../security";
 import { tags } from "../../../../tags";
 
 const emoji: PathItemObject = {
@@ -10,6 +11,7 @@ const emoji: PathItemObject = {
     description: "登録したチーム固有の絵文字を削除します。",
     operationId: "deleteEmoji",
     tags: [tags.emoji],
+    security: scope.write,
     parameters: [
       parameterRef(teamName),
       {
