@@ -34,10 +34,12 @@ import { paginatedComments } from "./schemas/paginatedComments";
 import { paginatedMembers } from "./schemas/paginatedMembers";
 import { paginatedPosts } from "./schemas/paginatedPosts";
 import { paginatedStargazers } from "./schemas/paginatedStargazers";
+import { paginatedTags } from "./schemas/paginatedTags";
 import { paginatedTeams } from "./schemas/paginatedTeams";
 import { paginatedWatchers } from "./schemas/paginatedWatchers";
 import { post } from "./schemas/post";
 import { stargazer } from "./schemas/stargazer";
+import { tag } from "./schemas/tag";
 import { team } from "./schemas/team";
 import { teamStats } from "./schemas/teamStats";
 import { user } from "./schemas/user";
@@ -102,10 +104,12 @@ export async function getSpec(): Promise<OpenAPIObject> {
       paginatedMembers,
       paginatedPosts,
       paginatedStargazers,
+      paginatedTags,
       paginatedTeams,
       paginatedWatchers,
       post,
       stargazer,
+      tag,
       team,
       teamStats,
       updateCommentBody,

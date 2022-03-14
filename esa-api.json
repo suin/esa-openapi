@@ -1209,6 +1209,39 @@
         }
       }
     },
+    "/teams/{team_name}/tags": {
+      "get": {
+        "summary": "タグ一覧をタグ付けされた記事数の降順で取得する",
+        "operationId": "getTags",
+        "tags": ["tag", "esa"],
+        "parameters": [
+          { "$ref": "#/components/parameters/teamName" },
+          { "$ref": "#/components/parameters/paginationPage" },
+          { "$ref": "#/components/parameters/paginationPerPage" }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaginatedTags" }
+              }
+            },
+            "headers": {
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              },
+              "X-RateLimit-Reset": {
+                "$ref": "#/components/headers/X-RateLimit-Reset"
+              }
+            }
+          }
+        }
+      }
+    },
     "/user": {
       "get": {
         "summary": "認証中のユーザーを取得する",
@@ -2000,6 +2033,58 @@
           "max_per_page"
         ]
       },
+      "PaginatedTags": {
+        "title": "PaginatedTags",
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "description": "Tagのリスト",
+            "items": { "$ref": "#/components/schemas/Tag" }
+          },
+          "prev_page": {
+            "type": "integer",
+            "nullable": true,
+            "description": "1つ前のpage番号。存在しない場合はnull",
+            "example": null
+          },
+          "next_page": {
+            "type": "integer",
+            "nullable": true,
+            "description": "1つ先のpage番号。存在しない場合はnull",
+            "example": 2
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "リソースの総数",
+            "example": 30
+          },
+          "page": {
+            "type": "integer",
+            "description": "現在のページ番号",
+            "example": 1
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "1ページあたりに含まれる要素数",
+            "example": 20
+          },
+          "max_per_page": {
+            "type": "integer",
+            "description": "per_pageに指定可能な数の最大値",
+            "example": 100
+          }
+        },
+        "required": [
+          "tags",
+          "prev_page",
+          "next_page",
+          "total_count",
+          "page",
+          "per_page",
+          "max_per_page"
+        ]
+      },
       "PaginatedTeams": {
         "title": "PaginatedTeams",
         "type": "object",
@@ -2308,6 +2393,24 @@
           }
         },
         "required": ["created_at", "body", "user"]
+      },
+      "Tag": {
+        "title": "Tag",
+        "description": "記事のタグ",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "タグ名です。",
+            "example": "markdown"
+          },
+          "posts_count": {
+            "type": "integer",
+            "description": "タグ付けされた記事数です。",
+            "example": 1
+          }
+        },
+        "required": ["name", "posts_count"]
       },
       "Team": {
         "title": "Team",
@@ -2631,6 +2734,11 @@
       "name": "star",
       "description": "記事やコメントのStarに関するAPIです。",
       "x-displayName": "Star"
+    },
+    {
+      "name": "tag",
+      "description": "記事のタグに関するAPIです。",
+      "x-displayName": "タグ"
     },
     {
       "name": "team",
