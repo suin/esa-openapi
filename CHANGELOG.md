@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/suin/esa-openapi/compare/v2.1.0...v2.2.0) (2022-03-17)
+
+
+### Features
+
+* 🎸 GET /v1/teams/:team_name/tagsに対応しました ([#1](https://github.com/suin/esa-openapi/issues/1)) ([fbf1715](https://github.com/suin/esa-openapi/commit/fbf17152ec6db6a7706feee67db9f146ab877fe8))
+
 # [2.1.0](https://github.com/suin/esa-openapi/compare/v2.0.0...v2.1.0) (2021-04-23)
 
 
