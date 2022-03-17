@@ -34,6 +34,10 @@ const tags = $tags({
     description: "記事やコメントのStarに関するAPIです。",
     "x-displayName": "Star",
   },
+  tag: {
+    description: "記事のタグに関するAPIです。",
+    "x-displayName": "タグ",
+  },
   team: {
     description: "所属するチームに関するAPIです。",
     "x-displayName": "チーム",
